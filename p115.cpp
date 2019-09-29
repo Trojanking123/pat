@@ -42,6 +42,15 @@ void gen(int index, int n){
 
 
 
+
+
+
+
+
+
+
+
+
     for(int i = 1; i <= n; i++){
         if(hash_table[i] == false){
              array[index] = i;
