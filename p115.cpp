@@ -36,6 +36,8 @@ void gen(int index, int n){
                 }
             }
         }
+
+        
         if(judge) count++;
         return;
     }

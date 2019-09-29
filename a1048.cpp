@@ -12,6 +12,10 @@ int main(void){
         coin[temp]++;
     }
 
+
+
+    
+
     for(int i = 0; i < bill; i++){
       
         if( coin[i] && coin[ bill-i ]){
