@@ -25,7 +25,6 @@ bool func(int n){
     }
     return judge;
 }
-
 void gen(int index, int n){
     if(index > n){
         bool judge = true;
@@ -36,8 +35,6 @@ void gen(int index, int n){
                 }
             }
         }
-
-        
         if(judge) count++;
         return;
     }
