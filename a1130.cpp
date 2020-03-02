@@ -1,79 +1,65 @@
 #include<iostream>
-#include<map>
 #include<string>
-
+#include<algorithm>
 
 using namespace std;
 
 const int kMAX = 25;
+
+struct Node{
+    string data;
+    int left;
+    int right;
+    int height;
+    Node(){};
+    Node(string x, int l, int r):data(x), left(l), right(r), height(1){};
+};
+
+Node tree[kMAX];
+bool vis[kMAX] = {false};
+bool isRoot[kMAX] = {false};
 int n;
 
-struct Node{    
-    string data;
-    string left;
-    string right;
-    
-    
-};
-map<string, int> mp;
-map<string ,int> id;
-Node tree[kMAX];
 
-void inorder(string root){
+void inOrder(int root){
+    if(root == -1) return;
+    int l = tree[root].left;
+    int r = tree[root].right;
     
-    int i = id[root];
-    string l = tree[i].left;
-    string r = tree[i].right;
-    if(l != "-1"){
-        printf("(");
-        inorder(l);
-        printf(")");
+    if(l != -1){
+        if(!isRoot[l] ) printf("(");
+        inOrder(l);
+        if(!isRoot[l] ) printf(")");
     }
-    printf("%s", root.data());
-    if(r != "-1"){
-        printf("(");
-        inorder(r);
-        printf(")");
+    printf("%s", tree[root].data.data());
+    if( r != -1){
+        if(!isRoot[r] ) printf("(");
+        inOrder(r);
+        if(!isRoot[r] ) printf(")");
     }
     
 }
-
 
 int main(void){
     cin >> n;
     for(int i = 0; i < n; i++){
-        cin >> tree[i].data;    
-        cin >> tree[i].left;
-        cin >> tree[i].right;
-
-        mp[tree[i].left]++;
-        mp[tree[i].right]++;
-        id[tree[i].data] = i;
-
+        string x;
+        int l,r;
+        cin >> x >> l >> r;
+        tree[i+1] = Node(x, l, r);
+        if(l != -1) vis[l] = true;
+        if(r != -1) vis[r] = true;
+        if(l == -1 && r == -1) isRoot[i+1] = true;
     }
-    string root;
-    for(auto it = mp.begin(); it != mp.end(); it++){
-        if(it->second == 0){
-            root = it->first;
+    int root;
+    for(int i = 1; i <= n; i++){
+        if(vis[i] == false){
+            root = i;
             break;
         }
     }
-    cout<<root<<endl;
-    inorder(root);
 
+    inOrder(root);
 
     return 0;
 }
-
-/*
-8
-* 8 7
-a -1 -1
-* 4 1
-+ 2 5
-b -1 -1
-d -1 -1
-- -1 6
-c -1 -1
-
-*/

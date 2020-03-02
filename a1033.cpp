@@ -84,12 +84,6 @@ int main(void){
                 moved = sta[next].dis;
             }
         }
-        
-        
-
     }
-
-
-
     return 0;
 }
